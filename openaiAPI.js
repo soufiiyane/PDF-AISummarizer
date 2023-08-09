@@ -16,7 +16,6 @@ app.get('/api/summarize', async (req, res) => {
                 error: 'Prompt is required',
             });
         }
-
         const configuration = new Configuration({
             apiKey: process.env.OPEN_API_KEY,
         });
