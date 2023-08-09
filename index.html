@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./node_modules/toastr/build/toastr.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Your HTML content goes here -->
+    <header class="container">
+        <nav>
+            <h3><span class="red">PDF</span> Summarizer</h3>
+            <a  href="#"><i class="fa-brands fa-github fa-2x"></i></a>
+        </nav>
+
+        <div class="content">
+            <h1>Summarize your <span class="red">PDF</span> now with AI</h1>
+            <p class="opacity-50">Powered by OpenAI, <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                how to get a better experience ?</a>
+            </p>
+            <input class="form-control mt-3" accept="application/pdf" type="file" id="pdfInput">
+            <center><button id="summarize" class="btn btn-sm btn-success mt-5 px-5">Summarize</button></center>
+        </div>
+
+    </header>
+
+    <div class="loader-container">
+        <span class="loader">
+
+        </span>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><span class="red">PDF</span> Summarizer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Thank you for using our PDF Summarizer service! <br>
+                        For a better experience, please upload PDFs with a maximum of 30 pages and containing
+                        text (not images). PDFs with clear, legible text, well-structured content,
+                        and consistent formatting tend to produce better summaries.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End od HTML content -->
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/pdfjs-dist/build/pdf.js"></script>
+    <script src="./node_modules/pdfjs-dist/build/pdf.worker.js"></script>
+    <script src="./node_modules/html2canvas/dist/html2canvas.js"></script>
+    <script src="./node_modules/jspdf/dist/jspdf.umd.js"></script>
+    <script src="./node_modules/toastr/build/toastr.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

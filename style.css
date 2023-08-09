@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #000;
+
+}
+a{
+    color: inherit;
+}
+header{
+    color: white;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2% 0;
+}
+span.red {
+    color: #fe0000;
+}
+
+nav > a {
+    text-decoration: none;
+    color: white;
+}
+.content{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+}
+.content>input{
+    width: 90%;
+}
+.loader-container{
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.5);
+    display: none;
+}
+span.loader {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid #FFF;
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+span.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-left: 4px solid #FF3D00;
+    border-bottom: 4px solid transparent;
+    animation: rotation 0.5s linear infinite reverse;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#contentToPrint h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#contentToPrint h1 > span{
+    color: #fe0000;
+}
+#contentToPrint p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
