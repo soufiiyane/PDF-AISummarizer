@@ -6,9 +6,8 @@ let loader = document.querySelector(".loader-container");
 let pdfContent = document.querySelector('.SummarizedContent');
 let file;
 
-function errorToast(text){
-    toastr["error"](text, "Error")
-
+function toastr(type,text){
+    toastr[type](text, type)
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -31,10 +30,11 @@ const loadPdf = async (pdfUrl) => {
     try {
         return await PDFJS.getDocument(pdfUrl).promise;
     } catch (error) {
-        errorToast("Failed to load PDF");
+        toastr('error',"Failed to load PDF");
         throw new Error('Failed to load PDF');
     }
 };
+
 const extractTextFromPdf = async (pdf) => {
     const numPages = pdf.numPages;
     for (let i = 1; i <= numPages; i++) {
@@ -48,29 +48,31 @@ const extractTextFromPdf = async (pdf) => {
     }
     return pageContent;
 };
+
+// TODO: toastr handler
 const summarizeText = async (prompt) => {
     try {
         const response = await fetch(`http://localhost:3000/api/summarize?prompt="${prompt}"`);
         if (!response.ok) {
-            errorToast("Failed to get summarization response")
+            console.log("summarize")
             throw new Error('Failed to get summarization response');
         }
         const data = await response.json();
         summarizedData.push(data.summary)
     }
     catch (error) {
-        errorToast("Failed to summarize text")
+        loader.style.display = "none"
         throw new Error('Failed to summarize text');
     }
-
 };
+
 document.getElementById("pdfInput").addEventListener("change", (event) => {
-     file = event.target.files[0]; // Get the uploaded file
+     file = event.target.files[0];
 });
 
-function Convert_HTML_To_PDF(elementHTML) {
+function Convert_HTML_To_PDF(HTMLContent) {
     let doc = new jsPDF();
-    doc.html(elementHTML, {
+    doc.html(HTMLContent, {
         callback: function(doc) {
             doc.save('SummarizedAI.pdf');
         },
@@ -153,21 +155,19 @@ document.getElementById("summarize").addEventListener("click",(c)=>{
                         loader.style.display = "none"
                         localStorage.setItem(file.name,summarizedData)
                         Convert_HTML_To_PDF(pdfLayout(summarizedData));
-
+                        toastr('success','File has been summarized successfully')
                     })
                     .catch(error => {
-                        console.error(error);
+                        toastr("error",error)
                     });
             };
             reader.readAsArrayBuffer(file);
         }
         else{
-            console.log("File already stored")
-            console.log(localStorage.getItem(file.name))
+            toastr('info','File is already summarized')
         }
     }
     else {
-        errorToast("No file has been selected");
+        toastr('error',"No file has been selected");
     }
 })
-
